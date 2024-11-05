@@ -46,9 +46,12 @@ export default function LoginCard() {
 
     try {
       const res = await axios.post("/login", { username });
-      localStorage.setItem("sessionId", res.data.sessionId);
-      localStorage.setItem("username", username);
-      router.push("/comments");
+      if (typeof window !== 'undefined') {
+        const sessionId = `${res.data.sessionId}-${Date.now()}`;
+        localStorage.setItem("sessionId", sessionId);
+        localStorage.setItem("username", username);
+        router.push("/comments");
+      }
     } catch (error) {
       const axiosError = error as AxiosError;
       if (axiosError.response) {
@@ -100,7 +103,7 @@ export default function LoginCard() {
               "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                 borderColor: "#90CAF9",
               },
-              ariaLabel: "username"
+              ariaLabel: "username",
             }}
           />
         </FormControl>

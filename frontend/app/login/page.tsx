@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import LoginContainer from "@/components/LoginContainer";
 import { Metadata } from "next";
 
@@ -8,10 +8,11 @@ export const metadata: Metadata = {
 };
 
 const LoginPage = () => {
-
   return (
     <>
-    <LoginContainer/>
+      <Suspense fallback={"Loading..."}>
+        <LoginContainer />
+      </Suspense>
     </>
   );
 };

@@ -33,7 +33,7 @@ const io = new Server(server, {
 app.post('/api/login', (req, res) => {
   const { username } = req.body;
   if (username) {
-    res.json({ sessionId: `session-${username}-${Date.now()}` });
+    res.json({ sessionId: `session-${username}` });
   }
   else {
     res.status(400).json({ error: 'Username is required!' });

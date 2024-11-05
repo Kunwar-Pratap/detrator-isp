@@ -4,7 +4,14 @@ import React, { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import axios from "@/utils/axios";
 import { useRouter } from "next/navigation";
-import { TextField, Button, Typography, Box, Container, Stack } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Container,
+  Stack,
+} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -23,23 +30,24 @@ const Item = styled(Paper)(({ theme }) => ({
   color: "#eee",
 }));
 
-
 const Comments = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const username =
-    typeof window !== "undefined" ? localStorage.getItem("username") : null;
+  const [username, setUsername] = useState<string | null>(null);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (!username) {
+    const storedUsername =
+      typeof window !== "undefined" ? localStorage.getItem("username") : null;
+    if (storedUsername) {
+      setUsername(storedUsername);
+    } else {
       alert("Please login to post a comment");
       router.push("/login");
       return;
     }
-
     const socket: Socket = io("http://localhost:5000", {
       reconnectionAttempts: 5,
       timeout: 2000,
@@ -87,7 +95,7 @@ const Comments = () => {
     }
   };
 
-    if (!username) return null;
+  if (!username) return null;
 
   return (
     <Container

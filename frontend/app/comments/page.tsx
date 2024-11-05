@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense} from "react";
 import Comments from "@/components/Comments";
 import { Metadata } from "next";
 
@@ -8,10 +8,11 @@ export const metadata: Metadata = {
 };
 
 const CommentsPage = () => {
-
   return (
     <>
-    <Comments/>
+      <Suspense fallback={"Loading..."}>
+        <Comments />
+      </Suspense>
     </>
   );
 };
