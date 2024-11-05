@@ -2,6 +2,9 @@
 
 This project is a real-time comments system that allows users to log in with a username, post comments, and view new comments as they are added, all in real-time. The application is built using Next.js for the front end and Node.js for the back end, with comments stored in a MySQL database.
 
+![login](https://github.com/user-attachments/assets/e424f20a-be82-42a8-8185-9d92d9bedf62)
+
+
 ## Table of Contents
 
 - [Features](#features)
